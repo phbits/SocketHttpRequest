@@ -10,6 +10,7 @@ trigger:
   paths:
     exclude:
     - CHANGELOG.md
+    - 'donotuse-azure-pipelines (2).yaml.txt'
   tags:
     include:
     - "v*"
