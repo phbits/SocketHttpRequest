@@ -1,7 +1,7 @@
 
 @{
 
-RootModule = 'SocketHttpRequest.psm1'
+RootModule = 'Source\SocketHttpRequest.psm1'
 
 ModuleVersion = '1.0'
 

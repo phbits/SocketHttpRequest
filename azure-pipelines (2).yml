@@ -1,14 +1,9 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
   branches:
     include:
-    - azure-pipelines
+    - main
   paths:
-    exclue:
+    exclude:
     - CHANGELOG.md
   tags:
     include:
@@ -22,7 +17,7 @@ stages:
       - job: Package_Module
         displayName: 'Package Module'
         pool:
-          vmImage: ubuntu-latest
+          vmImage: 'ubuntu 16.04'
         steps:
           - task: GitVersion@5
             name: gitVersion
@@ -48,6 +43,7 @@ stages:
               artifact: 'output'
               publishLocation: 'pipeline'
               parallel: true
+
   - stage: Test
     dependsOn: Build
     jobs:
@@ -55,7 +51,7 @@ stages:
         displayName: 'Linux'
         timeoutInMinutes: 0
         pool:
-          vmImage: ubuntu-latest
+          vmImage: 'ubuntu 16.04'
         steps:
           - task: DownloadPipelineArtifact@2
             displayName: 'Download Pipeline Artifact'
@@ -226,77 +222,47 @@ stages:
               summaryFileLocation: 'output/testResults/CodeCov*.xml'
               pathToSources: '$(Build.SourcesDirectory)/output/$(dscBuildVariable.RepositoryName)'
 
-#  - stage: Deploy
-#    dependsOn: Test
-#    # Only execute deploy stage if we're on master and previous stage succeeded
-#    condition: |
-#      and(
-#        succeeded(),
-#        or(
-#          eq(variables['Build.SourceBranch'], 'refs/heads/master'),
-#          startsWith(variables['Build.SourceBranch'], 'refs/tags/')
-#        ),
-#        contains(variables['System.TeamFoundationCollectionUri'], 'synedgy')
-#      )
-#    jobs:
-#      - job: Deploy_Module
-#        displayName: 'Deploy Module'
-#        pool:
-#          vmImage: 'ubuntu 16.04'
-#        steps:
-#          - task: DownloadPipelineArtifact@2
-#            displayName: 'Download Pipeline Artifact'
-#            inputs:
-#              buildType: 'current'
-#              artifactName: 'output'
-#              targetPath: '$(Build.SourcesDirectory)/output'
-#          - task: PowerShell@2
-#            name: publishRelease
-#            displayName: 'Publish Release'
-#            inputs:
-#              filePath: './build.ps1'
-#              arguments: '-tasks publish'
-#              pwsh: true
-#            env:
-#              GitHubToken: $(GitHubToken)
-#              GalleryApiToken: $(GalleryApiToken)
-#          - task: PowerShell@2
-#            name: sendChangelogPR
-#            displayName: 'Send Changelog PR'
-#            inputs:
-#              filePath: './build.ps1'
-#              arguments: '-tasks Create_ChangeLog_GitHub_PR'
-#              pwsh: true
-#            env:
-#              GitHubToken: $(GitHubToken)
+  - stage: Deploy
+    dependsOn: Test
+    # Only execute deploy stage if we're on master and previous stage succeeded
+    condition: |
+      and(
+        succeeded(),
+        or(
+          eq(variables['Build.SourceBranch'], 'refs/heads/master'),
+          startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+        ),
+        contains(variables['System.TeamFoundationCollectionUri'], 'synedgy')
+      )
+    jobs:
+      - job: Deploy_Module
+        displayName: 'Deploy Module'
+        pool:
+          vmImage: 'ubuntu 16.04'
+        steps:
+          - task: DownloadPipelineArtifact@2
+            displayName: 'Download Pipeline Artifact'
+            inputs:
+              buildType: 'current'
+              artifactName: 'output'
+              targetPath: '$(Build.SourcesDirectory)/output'
+          - task: PowerShell@2
+            name: publishRelease
+            displayName: 'Publish Release'
+            inputs:
+              filePath: './build.ps1'
+              arguments: '-tasks publish'
+              pwsh: true
+            env:
+              GitHubToken: $(GitHubToken)
+              GalleryApiToken: $(GalleryApiToken)
+          - task: PowerShell@2
+            name: sendChangelogPR
+            displayName: 'Send Changelog PR'
+            inputs:
+              filePath: './build.ps1'
+              arguments: '-tasks Create_ChangeLog_GitHub_PR'
+              pwsh: true
+            env:
+              GitHubToken: $(GitHubToken)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-pool:
-  vmImage: ubuntu-latest
-
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
