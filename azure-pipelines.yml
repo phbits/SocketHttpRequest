@@ -8,7 +8,7 @@ trigger:
     include:
     - azure-pipelines
   paths:
-    exclue:
+    exclude:
     - CHANGELOG.md
   tags:
     include:
