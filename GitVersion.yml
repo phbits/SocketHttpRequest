@@ -6,7 +6,7 @@ patch-version-bump-message: '\s?(fix|patch)'
 no-bump-message: '\+semver:\s?(none|skip)'
 assembly-informational-format: '{NuGetVersionV2}+Sha.{Sha}.Date.{CommitDate}'
 branches:
-  master:
+  azure-pipelines:
     tag: preview
     regex: ^main$
   pull-request:
