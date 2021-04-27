@@ -94,7 +94,7 @@ PrivateData = @{
 
     PSData = @{
 
-        Prerelease = 'alpha0003'
+        Prerelease = 'alpha0004'
         # Tags applied to this module. These help with module discovery in online galleries.
         # Tags = @()
 
@@ -108,7 +108,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-          ReleaseNotes = '## [0.1.0-alpha0003] - 2021-04-27
+          ReleaseNotes = '## [0.1.0-alpha0004] - 2021-04-27
 
 ### Added
 

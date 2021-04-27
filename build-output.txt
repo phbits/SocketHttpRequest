@@ -1,0 +1,121 @@
+PS C:\dev\SocketHttpRequest> .\build.ps1 -Tasks build
+[pre-build] Starting Build Init
+[build] Starting build with InvokeBuild.
+[build] Parsing defined tasks
+[build] Loading Configuration from C:\dev\SocketHttpRequest\build.yaml
+Importing tasks from module Sampler.GitHubTasks
+         Loading New-Release.GitHub.build.Sampler.GitHubTasks.ib.tasks...
+Importing tasks from module Sampler
+         Loading Build-Module.ModuleBuilder.build.Sampler.ib.tasks...
+         Loading Clean.ModuleBuilder.build.Sampler.ib.tasks...
+         Loading DeployAll.PSDeploy.build.Sampler.ib.tasks...
+         Loading DscResource.Test.build.Sampler.ib.tasks...
+         Loading generateHelp.PlatyPS.build.Sampler.ib.tasks...
+         Loading GuestConfig.build.Sampler.ib.tasks...
+         Loading Invoke-Pester.pester.build.Sampler.ib.tasks...
+         Loading Merge-CodeCoverageFiles.pester.build.Sampler.ib.tasks...
+         Loading release.module.build.Sampler.ib.tasks...
+         Loading Set-BuildEnvironment.BuildHelpers.build.Sampler.ib.tasks...
+Adding Workflow from configuration:
+  +-> .
+  +-> build
+  +-> hqrmtest
+  +-> publish
+  +-> pack
+  +-> test
+[build] Executing requested workflow: build
+Build build C:\dev\SocketHttpRequest\build.ps1
+Redefined task '.'.
+
+===============================================================================
+                        CLEAN
+Deleting the content of the Build Output folder, except ./modules
+-------------------------------------------------------------------------------
+  /build/Clean
+  C:\dev\SocketHttpRequest\output\RequiredModules\Sampler\0.110.1\tasks\Clean.ModuleBuilder.build.ps1:16
+
+Removing C:\dev\SocketHttpRequest\output\* excluding RequiredModules
+Done /build/Clean 00:00:00.0156400
+
+===============================================================================
+                        BUILD MODULEOUTPUT MODULEBUILDER
+Build the Module based on its Build.psd1 definition
+-------------------------------------------------------------------------------
+  /build/Build_Module_ModuleBuilder/Build_ModuleOutput_ModuleBuilder
+  C:\dev\SocketHttpRequest\output\RequiredModules\Sampler\0.110.1\tasks\Build-Module.ModuleBuilder.build.ps1:41
+
+        Project Name               = 'SocketHttpRequest'
+        Module Version             = '0.1.0-alpha0004'
+        Source Path                = 'C:\dev\SocketHttpRequest\source'
+        Output Directory           = 'C:\dev\SocketHttpRequest\output'
+        Built Module Subdirectory  = 'C:\dev\SocketHttpRequest\output\'
+        Module Manifest Path (src) = 'C:\dev\SocketHttpRequest\source\SocketHttpRequest.psd1'
+        Release Notes path         = 'C:\dev\SocketHttpRequest\output\ReleaseNotes.md'
+WARNING: The names of some imported commands from the module 'ModuleBuilder' include unapproved verbs that might make them less discoverable. To find the commands with unapproved verbs, run the Import-Module command again with the
+Verbose parameter. For a list of approved verbs, type Get-Verb.
+Adding OutputDirectory with value C:\dev\SocketHttpRequest\output from current Variables
+Adding VersionedOutputDirectory with value True from current Variables
+Adding Encoding with value UTF8 from Build Info
+Building Module to C:\dev\SocketHttpRequest\output\SocketHttpRequest...
+Done /build/Build_Module_ModuleBuilder/Build_ModuleOutput_ModuleBuilder 00:00:00.6649900
+
+===============================================================================
+                        BUILD DSCRESOURCESTOEXPORT MODULEBUILDER
+
+-------------------------------------------------------------------------------
+  /build/Build_Module_ModuleBuilder/Build_DscResourcesToExport_ModuleBuilder
+  C:\dev\SocketHttpRequest\output\RequiredModules\Sampler\0.110.1\tasks\Build-Module.ModuleBuilder.build.ps1:402
+
+        Project Name             = 'SocketHttpRequest'
+        Source Path              = 'C:\dev\SocketHttpRequest\source'
+        Output Directory         = 'C:\dev\SocketHttpRequest\output'
+WARNING: The names of some imported commands from the module 'ModuleBuilder' include unapproved verbs that might make them less discoverable. To find the commands with unapproved verbs, run the Import-Module command again with the
+Verbose parameter. For a list of approved verbs, type Get-Verb.
+        Built Module Base        = 'C:\dev\SocketHttpRequest\output\SocketHttpRequest\0.1.0'
+        Built Module Manifest    = 'C:\dev\SocketHttpRequest\output\SocketHttpRequest\0.1.0\SocketHttpRequest.psd1'
+        Built Module Root Script  = 'C:\dev\SocketHttpRequest\output\SocketHttpRequest\0.1.0\SocketHttpRequest.psm1'
+        Built DSC Resource Path  = 'C:\dev\SocketHttpRequest\output\SocketHttpRequest\0.1.0\DSCResources'
+        Module Version           = '0.1.0-alpha0004'
+        Module Version Folder    = '0.1.0'
+        Pre-release Tag          = 'alpha0004'
+Looking in C:\dev\SocketHttpRequest\output\SocketHttpRequest\0.1.0\SocketHttpRequest.psm1
+Looking in C:\dev\SocketHttpRequest\output\SocketHttpRequest\0.1.0\DSCResources
+Done /build/Build_Module_ModuleBuilder/Build_DscResourcesToExport_ModuleBuilder 00:00:00.0746382
+Done /build/Build_Module_ModuleBuilder 00:00:00.7552546
+
+===============================================================================
+                        BUILD NESTEDMODULES MODULEBUILDER
+
+-------------------------------------------------------------------------------
+  /build/Build_NestedModules_ModuleBuilder
+  C:\dev\SocketHttpRequest\output\RequiredModules\Sampler\0.110.1\tasks\Build-Module.ModuleBuilder.build.ps1:157
+
+        OutputDirectory       = 'C:\dev\SocketHttpRequest\output'
+        Built Module Manifest = 'C:\dev\SocketHttpRequest\output\SocketHttpRequest\0.1.0\SocketHttpRequest.psd1'
+        Built Module Base     = 'C:\dev\SocketHttpRequest\output\SocketHttpRequest\0.1.0'
+        Module Version        = '0.1.0-alpha0004'
+        Module Version Folder = '0.1.0'
+        Pre-release Tag       = 'alpha0004'
+WARNING: The names of some imported commands from the module 'ModuleBuilder' include unapproved verbs that might make them less discoverable. To find the commands with unapproved verbs, run the Import-Module command again with the
+Verbose parameter. For a list of approved verbs, type Get-Verb.
+Done /build/Build_NestedModules_ModuleBuilder 00:00:00.0689292
+
+===============================================================================
+                        CREATE CHANGELOG RELEASE OUTPUT
+Create ReleaseNotes from changelog and update the Changelog for release
+-------------------------------------------------------------------------------
+  /build/Create_changelog_release_output
+  C:\dev\SocketHttpRequest\output\RequiredModules\Sampler\0.110.1\tasks\release.module.build.ps1:41
+
+        OutputDirectory       = 'C:\dev\SocketHttpRequest\output'
+        ReleaseNotesPath      = 'C:\dev\SocketHttpRequest\output\ReleaseNotes.md'
+        ChangeLogOutputPath   = 'C:\dev\SocketHttpRequest\output\CHANGELOG.md'
+        Built Module Manifest = 'C:\dev\SocketHttpRequest\output\SocketHttpRequest\0.1.0\SocketHttpRequest.psd1'
+        Module Version        = '0.1.0-alpha0004'
+        Module Version Folder = '0.1.0'
+        Pre-release Tag       = 'alpha0004'
+Built Manifest C:\dev\SocketHttpRequest\output\SocketHttpRequest\0.1.0\SocketHttpRequest.psd1
+Done /build/Create_changelog_release_output 00:00:00.1001224
+Done /build 00:00:00.9399462
+Build succeeded. 7 tasks, 0 errors, 0 warnings 00:00:01.2250195
+PS C:\dev\SocketHttpRequest>
